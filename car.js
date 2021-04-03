@@ -9,7 +9,44 @@ const Car = class {
   #isStarted;
   #mileage;
 
-  constructor() {
+  constructor(
+    brand,
+    model,
+    yearOfManufacturing,
+    maxSpeed,
+    maxFuelVolume,
+    fuelConsumption
+  ) {
+    if (brand.length > 50) {
+      throw new Error("too long brand");
+    }
+    this.#brand = brand;
+    if (model.length > 50) {
+      throw new Error("too long model");
+    }
+    this.#model = model;
+    let today = new Date();
+    let year = today.getFullYear();
+    if (
+      yearOfManufacturing < 1900 ||
+      yearOfManufacturing > year ||
+      isNaN(yearOfManufacturing)
+    ) {
+      throw new Error("wrong yearOfManufacturing");
+    }
+    this.#yearOfManufacturing = yearOfManufacturing;
+
+    if (maxSpeed < 100 || maxSpeed > 300 || isNaN(maxSpeed)) {
+      throw new Error("wrong maxSpeed");
+    }
+    this.#maxSpeed = maxSpeed;
+
+    if (maxFuelVolume < 5 || maxFuelVolume > 20 || isNaN(maxFuelVolume)) {
+      throw new Error("wrong maxFuelVolume");
+    }
+    this.#maxFuelVolume = maxFuelVolume;
+    this.#fuelConsumption = fuelConsumption;
+
     this.#currentFuelVolume = 0;
     this.#isStarted = false;
     this.#mileage = 0;
@@ -38,7 +75,7 @@ const Car = class {
   set yearOfManufacturing(value) {
     let today = new Date();
     let year = today.getFullYear();
-    if (value < 1900 || value > year) {
+    if (value < 1900 || value > year || isNaN(value)) {
       throw new Error("wrong yearOfManufacturing");
     }
     this.#yearOfManufacturing = value;
@@ -48,7 +85,7 @@ const Car = class {
   }
 
   set maxSpeed(value) {
-    if (value < 100 || value > 300) {
+    if (value < 100 || value > 300 || isNaN(value)) {
       throw new Error("wrong maxSpeed");
     }
     this.#maxSpeed = value;
@@ -58,7 +95,7 @@ const Car = class {
   }
 
   set maxFuelVolume(value) {
-    if (value < 5 || value > 20) {
+    if (value < 5 || value > 20 || isNaN(value)) {
       throw new Error("wrong maxFuelVolume");
     }
     this.#maxFuelVolume = value;
