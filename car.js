@@ -5,9 +5,15 @@ const Car = class {
   #maxSpeed;
   #maxFuelVolume;
   #fuelConsumption;
-  #currentFuelVolume = 0;
-  #isStarted = false;
-  #mileage = 0;
+  #currentFuelVolume;
+  #isStarted;
+  #mileage;
+
+  constructor() {
+    this.#currentFuelVolume = 0;
+    this.#isStarted = false;
+    this.#mileage = 0;
+  }
 
   set brand(value) {
     if (value.length > 50) {
