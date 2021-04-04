@@ -132,11 +132,13 @@ const Car = class {
     }
     this.#isStarted = false;
   }
+
   fillUpGasTank(value) {
     if (isNaN(value) || value <= 0) {
       throw new Error("Неверное количество топлива для заправки");
     }
-    if ((this.#currentFuelVolume += value) > this.maxFuelVolume) {
+    let fuel = this.#currentFuelVolume;
+    if ((fuel += value) > this.maxFuelVolume) {
       throw new Error("Топливный бак переполнен");
     }
     this.#currentFuelVolume += value;
